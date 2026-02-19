@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Richy Maritta | Video Editor Portfolio</title>
-  <meta name="description" content="Richy Maritta - Video Editor & Visual Storyteller Portfolio">
+  <title>Portfolio | Richy Maritta</title>
+  <meta name="description" content="Portfolio - Richy Maritta Video Editor Projects">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -105,6 +105,75 @@
 
     .theme-label {
       font-weight: 600;
+    }
+
+    /* Search Bar */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px 14px 48px;
+      background: var(--video-surface);
+      border: 2px solid var(--video-border);
+      border-radius: 999px;
+      font-size: 15px;
+      color: var(--video-text);
+      transition: all 0.3s;
+    }
+
+    .search-input::placeholder {
+      color: var(--video-muted);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--video-accent);
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--video-muted);
+      pointer-events: none;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--video-surface);
+      border: 1px solid var(--video-border);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--video-muted);
+      font-size: 16px;
+      transition: all 0.2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .search-clear.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .search-clear:hover {
+      border-color: var(--video-accent);
+      color: var(--video-accent);
     }
 
     nav {
@@ -210,71 +279,6 @@
       color: var(--video-heading);
     }
 
-    .subtitle {
-      font-size: 20px;
-      color: var(--video-muted);
-      line-height: 1.7;
-      max-width: 640px;
-      margin-bottom: 32px;
-    }
-
-    .section-divider {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 0;
-    }
-
-    .section-divider hr {
-      flex: 1;
-      border: none;
-      border-top: 1px solid var(--video-border);
-    }
-
-    .section-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--video-muted);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    @media (min-width: 640px) {
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .card {
-      background: var(--video-surface);
-      border: 1px solid var(--video-border);
-      border-radius: 8px;
-      padding: 16px;
-      text-align: center;
-      transition: all 0.2s;
-    }
-
-    .card:hover {
-      border-color: var(--video-accent);
-    }
-
-    .card-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .card-title {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--video-heading);
-    }
-
     .section-title {
       font-size: 24px;
       font-weight: 600;
@@ -374,27 +378,6 @@
       color: var(--video-muted);
     }
 
-    .all-portfolio-link {
-      display: inline-block;
-      margin-top: 24px;
-      color: var(--video-accent);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 14px 28px;
-      background: var(--video-surface);
-      border: 2px solid var(--video-accent);
-      border-radius: 999px;
-      transition: all 0.3s;
-    }
-
-    .all-portfolio-link:hover {
-      background: var(--video-accent);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
-    }
-
     footer {
       border-top: 1px solid var(--video-border);
       margin-top: 80px;
@@ -436,8 +419,8 @@
     <div class="nav-content">
       <a href="/index.html" class="nav-brand">Richy Maritta</a>
       <div class="nav-links">
-        <a href="/index.html" class="nav-link active">Home</a>
-        <a href="/portfolio/index.html" class="nav-link">Portfolio</a>
+        <a href="/index.html" class="nav-link">Home</a>
+        <a href="/portfolio/index.html" class="nav-link active">Portfolio</a>
         <a href="/about/index.html" class="nav-link">About</a>
       </div>
     </div>
@@ -452,121 +435,137 @@
         <span class="font-mono">00:00:00:00</span>
       </div>
 
-      <h1 class="font-display">Hi, I'm @Rit👋</h1>
-      <p class="subtitle">
-        Video Editor | Storyteller | Visual Artist
+      <h1 class="font-display">Portfolio</h1>
+      <p style="font-size: 16px; color: var(--video-muted); margin-bottom: 32px;">
+        A collection of my video editing projects, from music videos to commercials and documentaries.
       </p>
 
-      <p class="subtitle" style="font-size: 16px;">
-        I'm Maritta Ketnawang (aka Richy), a passionate video editor 
-        crafting visual stories that captivate and inspire.
-      </p>
-
-      <div class="section-divider">
-        <hr>
-        <span class="section-label font-mono">Skills</span>
-        <hr>
+      <!-- Search Bar -->
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput"
+          placeholder="Search projects..."
+          aria-label="Search portfolio"
+        >
+        <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
       </div>
 
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon">🎬</div>
-          <h3 class="card-title font-display">Premiere Pro</h3>
+      <h2 class="section-title font-display" style="margin-top: 32px;">All Projects</h2>
+
+      <div id="projectsContainer">
+        <div class="project-card" data-title="neon dreams music video" data-tags="music video color grading motion graphics" data-client="neon artist">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f3?w=800&h=450&fit=crop" alt="Neon Dreams Music Video">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Neon Dreams - Music Video</h3>
+            <p class="project-desc">
+              A vibrant music video featuring dynamic cuts, neon effects, and sync-driven editing for an electronic artist.
+            </p>
+            <div class="tags">
+              <span class="tag">Music Video</span>
+              <span class="tag">Color Grading</span>
+              <span class="tag">Motion Graphics</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Jan 15, 2026</span>
+              <span>Neon Artist</span>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-icon">✨</div>
-          <h3 class="card-title font-display">After Effects</h3>
+        <div class="project-card" data-title="urban style fashion commercial" data-tags="commercial cinematic fashion" data-client="urban streetwear">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=450&fit=crop" alt="Urban Style Commercial">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Urban Style - Fashion Commercial</h3>
+            <p class="project-desc">
+              High-fashion commercial showcasing streetwear with cinematic shots and elegant transitions.
+            </p>
+            <div class="tags">
+              <span class="tag">Commercial</span>
+              <span class="tag">Cinematic</span>
+              <span class="tag">Fashion</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Dec 20, 2025</span>
+              <span>Urban Streetwear</span>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-icon">🎨</div>
-          <h3 class="card-title font-display">DaVinci</h3>
+        <div class="project-card" data-title="voices of change documentary" data-tags="documentary interview storytelling" data-client="indie production">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop" alt="Voices of Change Documentary">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Voices of Change - Documentary</h3>
+            <p class="project-desc">
+              A 15-minute documentary featuring interviews with local activists and emotional storytelling.
+            </p>
+            <div class="tags">
+              <span class="tag">Documentary</span>
+              <span class="tag">Interview</span>
+              <span class="tag">Storytelling</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Nov 10, 2025</span>
+              <span>Indie Production</span>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="card-icon">🎵</div>
-          <h3 class="card-title font-display">Sound</h3>
+        <div class="project-card" data-title="sarah and james wedding film" data-tags="wedding cinematic emotional" data-client="sarah james">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=450&fit=crop" alt="Sarah & James Wedding">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Sarah & James - Wedding Film</h3>
+            <p class="project-desc">
+              A cinematic wedding film capturing magic of a special day with emotional storytelling.
+            </p>
+            <div class="tags">
+              <span class="tag">Wedding</span>
+              <span class="tag">Cinematic</span>
+              <span class="tag">Emotional</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Oct 5, 2025</span>
+              <span>Sarah & James</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-title="energy revolution corporate" data-tags="corporate energy sustainability" data-client="green energy">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1497436072909-60f0e861b77?w=800&h=450&fit=crop" alt="Energy Revolution Corporate">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Energy Revolution - Corporate</h3>
+            <p class="project-desc">
+              Corporate video showcasing renewable energy solutions with stunning aerial footage and clean motion graphics.
+            </p>
+            <div class="tags">
+              <span class="tag">Corporate</span>
+              <span class="tag">Energy</span>
+              <span class="tag">Sustainability</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Sep 1, 2025</span>
+              <span>Green Energy</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="section-divider">
-        <hr>
-        <span class="section-label font-mono">Featured Projects</span>
-        <hr>
-      </div>
-
-      <!-- Only 3 Featured Projects on Home Page -->
-      <div class="project-card" data-title="neon dreams music video" data-tags="music video color grading motion graphics" data-client="neon artist">
-        <div class="project-thumbnail">
-          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f3?w=800&h=450&fit=crop" alt="Neon Dreams Music Video">
-        </div>
-        <div class="project-info">
-          <h3 class="project-title font-display">Neon Dreams - Music Video</h3>
-          <p class="project-desc">
-            A vibrant music video featuring dynamic cuts, neon effects, and sync-driven editing for an electronic artist.
-          </p>
-          <div class="tags">
-            <span class="tag">Music Video</span>
-            <span class="tag">Color Grading</span>
-            <span class="tag">Motion Graphics</span>
-          </div>
-          <div class="project-meta">
-            <span class="font-mono">Jan 15, 2026</span>
-            <span>Neon Artist</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card" data-title="urban style fashion commercial" data-tags="commercial cinematic fashion" data-client="urban streetwear">
-        <div class="project-thumbnail">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=450&fit=crop" alt="Urban Style Commercial">
-        </div>
-        <div class="project-info">
-          <h3 class="project-title font-display">Urban Style - Fashion Commercial</h3>
-          <p class="project-desc">
-            High-fashion commercial showcasing streetwear with cinematic shots and elegant transitions.
-          </p>
-          <div class="tags">
-            <span class="tag">Commercial</span>
-            <span class="tag">Cinematic</span>
-            <span class="tag">Fashion</span>
-          </div>
-          <div class="project-meta">
-            <span class="font-mono">Dec 20, 2025</span>
-            <span>Urban Streetwear</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card" data-title="voices of change documentary" data-tags="documentary interview storytelling" data-client="indie production">
-        <div class="project-thumbnail">
-          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop" alt="Voices of Change Documentary">
-        </div>
-        <div class="project-info">
-          <h3 class="project-title font-display">Voices of Change - Documentary</h3>
-          <p class="project-desc">
-            A 15-minute documentary featuring interviews with local activists and emotional storytelling.
-          </p>
-          <div class="tags">
-            <span class="tag">Documentary</span>
-            <span class="tag">Interview</span>
-            <span class="tag">Storytelling</span>
-          </div>
-          <div class="project-meta">
-            <span class="font-mono">Nov 10, 2025</span>
-            <span>Indie Production</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Link to All Portfolio -->
-      <div class="view-all-wrapper" style="text-align: center; margin-top: 32px;">
-        <a href="/portfolio/index.html" class="all-portfolio-link">
-          <span>🎬</span>
-          <span>View All Portfolio</span>
-          <span>→</span>
-        </a>
+      <!-- No Results Message -->
+      <div class="no-results" id="noResults">
+        <p>🔍 No projects found matching your search.</p>
+        <p style="font-size: 14px; margin-top: 8px;">Try different keywords.</p>
       </div>
     </div>
   </main>
@@ -613,6 +612,55 @@
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       setTheme(newTheme);
     }
+
+    // Search Functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+    const projects = document.querySelectorAll('.project-card');
+    const noResults = document.getElementById('noResults');
+
+    function searchProjects() {
+      const query = searchInput.value.toLowerCase().trim();
+      
+      if (query === '') {
+        projects.forEach(project => {
+          project.classList.remove('hidden');
+        });
+        noResults.classList.remove('visible');
+        searchClear.classList.remove('visible');
+        return;
+      }
+
+      searchClear.classList.add('visible');
+      let hasResults = false;
+
+      projects.forEach(project => {
+        const title = project.dataset.title || '';
+        const tags = project.dataset.tags || '';
+        const client = project.dataset.client || '';
+        
+        if (title.includes(query) || tags.includes(query) || client.includes(query)) {
+          project.classList.remove('hidden');
+          hasResults = true;
+        } else {
+          project.classList.add('hidden');
+        }
+      });
+
+      if (hasResults) {
+        noResults.classList.remove('visible');
+      } else {
+        noResults.classList.add('visible');
+      }
+    }
+
+    function clearSearch() {
+      searchInput.value = '';
+      searchProjects();
+    }
+
+    searchInput.addEventListener('input', searchProjects);
+    searchClear.addEventListener('click', clearSearch);
 
     // Initialize theme on page load
     document.addEventListener('DOMContentLoaded', () => {

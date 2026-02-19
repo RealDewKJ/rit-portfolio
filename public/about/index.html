@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Richy Maritta | Video Editor Portfolio</title>
-  <meta name="description" content="Richy Maritta - Video Editor & Visual Storyteller Portfolio">
+  <title>About | Richy Maritta</title>
+  <meta name="description" content="About Richy Maritta - Video Editor & Visual Storyteller">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -210,12 +210,27 @@
       color: var(--video-heading);
     }
 
-    .subtitle {
-      font-size: 20px;
-      color: var(--video-muted);
-      line-height: 1.7;
-      max-width: 640px;
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--video-heading);
+    }
+
+    .bio-section {
+      max-width: 720px;
       margin-bottom: 32px;
+    }
+
+    .bio-text {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--video-text);
+      margin-bottom: 24px;
+    }
+
+    .bio-text strong {
+      color: var(--video-accent);
     }
 
     .section-divider {
@@ -238,7 +253,7 @@
       color: var(--video-muted);
     }
 
-    .grid {
+    .skills-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
@@ -246,153 +261,90 @@
     }
 
     @media (min-width: 640px) {
-      .grid {
+      .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .skill-card {
+      background: var(--video-surface);
+      border: 1px solid var(--video-border);
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--video-accent);
+      transform: translateY(-2px);
+    }
+
+    .skill-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .skill-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--video-heading);
+    }
+
+    .skill-desc {
+      font-size: 14px;
+      color: var(--video-muted);
+      line-height: 1.6;
+    }
+
+    .contact-section {
+      margin-top: 48px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .contact-grid {
         grid-template-columns: repeat(4, 1fr);
       }
     }
 
-    .card {
+    .contact-card {
       background: var(--video-surface);
       border: 1px solid var(--video-border);
       border-radius: 8px;
-      padding: 16px;
+      padding: 24px;
       text-align: center;
       transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .card:hover {
-      border-color: var(--video-accent);
-    }
-
-    .card-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .card-title {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--video-heading);
-    }
-
-    .section-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: var(--video-heading);
-    }
-
-    .project-card {
-      background: var(--video-surface);
-      border: 1px solid var(--video-border);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      transition: all 0.2s;
-    }
-
-    .project-card:hover {
+    .contact-card:hover {
       border-color: var(--video-accent);
       transform: translateY(-4px);
     }
 
-    .project-card.hidden {
-      display: none;
+    .contact-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
     }
 
-    .no-results {
-      text-align: center;
-      padding: 48px 24px;
-      color: var(--video-muted);
+    .contact-title {
       font-size: 18px;
-      display: none;
-    }
-
-    .no-results.visible {
-      display: block;
-    }
-
-    .project-thumbnail {
-      aspect-video;
-      background: var(--video-bg);
-      overflow: hidden;
-    }
-
-    .project-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-
-    .project-card:hover .project-thumbnail img {
-      transform: scale(1.05);
-    }
-
-    .project-info {
-      padding: 16px;
-    }
-
-    .project-title {
       font-weight: 600;
-      font-size: 18px;
       margin-bottom: 8px;
       color: var(--video-heading);
     }
 
-    .project-card:hover .project-title {
-      color: var(--video-accent);
-    }
-
-    .project-desc {
-      color: var(--video-muted);
+    .contact-desc {
       font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .tag {
-      padding: 4px 12px;
-      background: var(--video-bg);
-      border: 1px solid var(--video-border);
-      border-radius: 999px;
-      font-size: 12px;
       color: var(--video-muted);
-    }
-
-    .project-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
-      color: var(--video-muted);
-    }
-
-    .all-portfolio-link {
-      display: inline-block;
-      margin-top: 24px;
-      color: var(--video-accent);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 14px 28px;
-      background: var(--video-surface);
-      border: 2px solid var(--video-accent);
-      border-radius: 999px;
-      transition: all 0.3s;
-    }
-
-    .all-portfolio-link:hover {
-      background: var(--video-accent);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
     }
 
     footer {
@@ -436,9 +388,9 @@
     <div class="nav-content">
       <a href="/index.html" class="nav-brand">Richy Maritta</a>
       <div class="nav-links">
-        <a href="/index.html" class="nav-link active">Home</a>
+        <a href="/index.html" class="nav-link">Home</a>
         <a href="/portfolio/index.html" class="nav-link">Portfolio</a>
-        <a href="/about/index.html" class="nav-link">About</a>
+        <a href="/about/index.html" class="nav-link active">About</a>
       </div>
     </div>
   </nav>
@@ -452,120 +404,113 @@
         <span class="font-mono">00:00:00:00</span>
       </div>
 
-      <h1 class="font-display">Hi, I'm @Rit👋</h1>
-      <p class="subtitle">
-        Video Editor | Storyteller | Visual Artist
-      </p>
-
-      <p class="subtitle" style="font-size: 16px;">
-        I'm Maritta Ketnawang (aka Richy), a passionate video editor 
-        crafting visual stories that captivate and inspire.
-      </p>
-
+      <h1 class="font-display">About Me</h1>
+      
       <div class="section-divider">
         <hr>
-        <span class="section-label font-mono">Skills</span>
+        <span class="section-label font-mono">Bio</span>
         <hr>
       </div>
 
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon">🎬</div>
-          <h3 class="card-title font-display">Premiere Pro</h3>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">✨</div>
-          <h3 class="card-title font-display">After Effects</h3>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🎨</div>
-          <h3 class="card-title font-display">DaVinci</h3>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🎵</div>
-          <h3 class="card-title font-display">Sound</h3>
-        </div>
+      <div class="bio-section">
+        <p class="bio-text">
+          Hi! I'm <strong>Maritta Ketnawang</strong>, better known as <strong>Richy</strong>. 
+          I'm a video editor who believes every frame tells a story.
+        </p>
+        <p class="bio-text">
+          With a passion for visual storytelling, I craft compelling videos that 
+          connect with audiences. Whether it's a commercial, music video, or 
+          documentary, I bring creativity and technical expertise to every project.
+        </p>
+        <p class="bio-text">
+          Based in Thailand (GMT+7), I've had the privilege of working with 
+          diverse clients across music videos, fashion commercials, corporate projects, and wedding films. 
+          My goal is to transform raw footage into visual narratives that captivate and inspire.
+        </p>
       </div>
 
       <div class="section-divider">
         <hr>
-        <span class="section-label font-mono">Featured Projects</span>
+        <span class="section-label font-mono">Skills & Tools</span>
         <hr>
       </div>
 
-      <!-- Only 3 Featured Projects on Home Page -->
-      <div class="project-card" data-title="neon dreams music video" data-tags="music video color grading motion graphics" data-client="neon artist">
-        <div class="project-thumbnail">
-          <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f3?w=800&h=450&fit=crop" alt="Neon Dreams Music Video">
-        </div>
-        <div class="project-info">
-          <h3 class="project-title font-display">Neon Dreams - Music Video</h3>
-          <p class="project-desc">
-            A vibrant music video featuring dynamic cuts, neon effects, and sync-driven editing for an electronic artist.
-          </p>
-          <div class="tags">
-            <span class="tag">Music Video</span>
-            <span class="tag">Color Grading</span>
-            <span class="tag">Motion Graphics</span>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🎬</div>
+          <div class="skill-title font-display">Adobe Premiere Pro</div>
+          <div class="skill-desc">
+            Professional video editing, timeline management, and multi-cam workflows.
           </div>
-          <div class="project-meta">
-            <span class="font-mono">Jan 15, 2026</span>
-            <span>Neon Artist</span>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">✨</div>
+          <div class="skill-title font-display">After Effects</div>
+          <div class="skill-desc">
+            Motion graphics, visual effects, compositing, and title sequences.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🎨</div>
+          <div class="skill-title font-display">DaVinci Resolve</div>
+          <div class="skill-desc">
+            Color grading, color correction, and advanced color management.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🎵</div>
+          <div class="skill-title font-display">Sound Design</div>
+          <div class="skill-desc">
+            Audio editing, mixing, sound effects, and music integration.
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">🎞</div>
+          <div class="skill-title font-display">Final Cut Pro</div>
+          <div class="skill-desc">
+            Apple ecosystem editing, optimized for Mac workflows.
           </div>
         </div>
       </div>
 
-      <div class="project-card" data-title="urban style fashion commercial" data-tags="commercial cinematic fashion" data-client="urban streetwear">
-        <div class="project-thumbnail">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=450&fit=crop" alt="Urban Style Commercial">
-        </div>
-        <div class="project-info">
-          <h3 class="project-title font-display">Urban Style - Fashion Commercial</h3>
-          <p class="project-desc">
-            High-fashion commercial showcasing streetwear with cinematic shots and elegant transitions.
-          </p>
-          <div class="tags">
-            <span class="tag">Commercial</span>
-            <span class="tag">Cinematic</span>
-            <span class="tag">Fashion</span>
-          </div>
-          <div class="project-meta">
-            <span class="font-mono">Dec 20, 2025</span>
-            <span>Urban Streetwear</span>
-          </div>
-        </div>
+      <div class="section-divider">
+        <hr>
+        <span class="section-label font-mono">Contact</span>
+        <hr>
       </div>
 
-      <div class="project-card" data-title="voices of change documentary" data-tags="documentary interview storytelling" data-client="indie production">
-        <div class="project-thumbnail">
-          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop" alt="Voices of Change Documentary">
-        </div>
-        <div class="project-info">
-          <h3 class="project-title font-display">Voices of Change - Documentary</h3>
-          <p class="project-desc">
-            A 15-minute documentary featuring interviews with local activists and emotional storytelling.
-          </p>
-          <div class="tags">
-            <span class="tag">Documentary</span>
-            <span class="tag">Interview</span>
-            <span class="tag">Storytelling</span>
-          </div>
-          <div class="project-meta">
-            <span class="font-mono">Nov 10, 2025</span>
-            <span>Indie Production</span>
-          </div>
-        </div>
-      </div>
+      <h2 class="section-title font-display" style="text-align: center; margin-bottom: 24px;">Let's Work Together</h2>
+      <p style="text-align: center; color: var(--video-muted); font-size: 16px; margin-bottom: 32px;">
+        Have a project in mind? I'd love to hear about it.
+      </p>
 
-      <!-- Link to All Portfolio -->
-      <div class="view-all-wrapper" style="text-align: center; margin-top: 32px;">
-        <a href="/portfolio/index.html" class="all-portfolio-link">
-          <span>🎬</span>
-          <span>View All Portfolio</span>
-          <span>→</span>
+      <div class="contact-grid">
+        <a href="mailto:richy@example.com" class="contact-card">
+          <div class="contact-icon">📧</div>
+          <div class="contact-title font-display">Email</div>
+          <div class="contact-desc">richy@example.com</div>
+        </a>
+
+        <a href="https://instagram.com/richy" target="_blank" class="contact-card">
+          <div class="contact-icon">📸</div>
+          <div class="contact-title font-display">Instagram</div>
+          <div class="contact-desc">@richy</div>
+        </a>
+
+        <a href="https://youtube.com/@richy" target="_blank" class="contact-card">
+          <div class="contact-icon">🎬</div>
+          <div class="contact-title font-display">YouTube</div>
+          <div class="contact-desc">@richy</div>
+        </a>
+
+        <a href="https://linkedin.com/in/richy" target="_blank" class="contact-card">
+          <div class="contact-icon">💼</div>
+          <div class="contact-title font-display">LinkedIn</div>
+          <div class="contact-desc">Connect</div>
         </a>
       </div>
     </div>

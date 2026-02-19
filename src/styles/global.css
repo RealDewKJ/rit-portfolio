@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --video-bg: #0a0a0a;
+  --video-surface: #111111;
+  --video-border: #222222;
+  --video-accent: #00d4ff;
+  --video-accent2: #ff4d4d;
+  --video-muted: #666666;
+}
+
+@layer base {
+  * {
+    @apply border-video-border;
+  }
+  
+  body {
+    @apply bg-video-bg text-white;
+  }
+}
+
+/* Video editor style scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--video-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--video-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--video-muted);
+}
+
+/* Timeline style selection */
+::selection {
+  background: var(--video-accent2);
+  color: white;
+}

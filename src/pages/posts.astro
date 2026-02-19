@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Posts - D">
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <!-- Timeline indicator -->
+    <div class="flex items-center gap-2 text-xs font-mono text-video-accent mb-8">
+      <div class="w-2 h-2 bg-video-accent rounded-full"></div>
+      <span>● POSTS</span>
+      <span class="text-video-muted">|</span>
+      <span>00:00:00:00</span>
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-12">
+      Posts
+    </h1>
+
+    <div class="space-y-4">
+      <!-- Example post - replace with your content -->
+      <a href="/posts/example" class="block group">
+        <div class="flex items-start justify-between gap-4 p-4 bg-video-surface border border-video-border rounded-lg hover:border-video-accent transition-all group-hover:translate-x-1">
+          <div class="flex-1">
+            <h2 class="font-display font-semibold text-lg mb-1 group-hover:text-video-accent transition-colors">
+              Example Post Title
+            </h2>
+            <p class="text-sm text-video-muted mb-2">
+              A brief description of what this post is about...
+            </p>
+            <time class="text-xs font-mono text-video-muted">
+              Published: Feb 19, 2026 • 3 min read
+            </time>
+          </div>
+          <div class="text-video-accent opacity-0 group-hover:opacity-100 transition-opacity">→</div>
+        </div>
+      </a>
+
+      <div class="text-center py-12">
+        <p class="text-video-muted">More posts coming soon...</p>
+      </div>
+    </div>
+
+    <!-- RSS Feed link -->
+    <div class="mt-12 flex justify-center">
+      <a href="/rss.xml" class="text-sm text-video-muted hover:text-video-accent transition-colors flex items-center gap-2">
+        <span>📡</span>
+        <span>RSS Feed</span>
+      </a>
+    </div>
+  </div>
+</Layout>

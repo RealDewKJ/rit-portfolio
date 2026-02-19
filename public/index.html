@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rit | Video Editor Portfolio</title>
+  <meta name="description" content="Rit (Maritta Ketnawang) - Video Editor & Visual Storyteller Portfolio">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --video-bg: #0a0a0a;
+      --video-surface: #111111;
+      --video-border: #222222;
+      --video-accent: #00d4ff;
+      --video-accent2: #ff4d4d;
+      --video-muted: #666666;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--video-bg);
+      color: white;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--video-border);
+    }
+
+    .nav-content {
+      max-width: 896px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      color: var(--video-accent);
+      font-weight: 700;
+      font-size: 20px;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--video-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: white;
+    }
+
+    main {
+      padding-top: 80px;
+    }
+
+    .container {
+      max-width: 896px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .timeline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--video-accent);
+      margin-bottom: 32px;
+    }
+
+    .rec-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--video-accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .timeline-divider {
+      color: var(--video-muted);
+    }
+
+    h1 {
+      font-size: clamp(40px, 8vw, 60px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--video-muted);
+      line-height: 1.7;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .section-divider hr {
+      flex: 1;
+      border: none;
+      border-top: 1px solid var(--video-border);
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--video-muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--video-surface);
+      border: 1px solid var(--video-border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--video-accent);
+    }
+
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .project-card {
+      background: var(--video-surface);
+      border: 1px solid var(--video-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      transition: all 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--video-accent);
+      transform: translateY(-4px);
+    }
+
+    .project-thumbnail {
+      aspect-video;
+      background: var(--video-bg);
+      overflow: hidden;
+    }
+
+    .project-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover .project-thumbnail img {
+      transform: scale(1.05);
+    }
+
+    .project-info {
+      padding: 16px;
+    }
+
+    .project-title {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .project-card:hover .project-title {
+      color: var(--video-accent);
+    }
+
+    .project-desc {
+      color: var(--video-muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 4px 12px;
+      background: var(--video-bg);
+      border: 1px solid var(--video-border);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--video-muted);
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--video-muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--video-border);
+      margin-top: 80px;
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: var(--video-muted);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--video-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--video-border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--video-muted);
+    }
+
+    ::selection {
+      background: var(--video-accent2);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-content">
+      <a href="#" class="nav-brand">Rit</a>
+      <div class="nav-links">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="timeline">
+        <div class="rec-dot"></div>
+        <span>● REC</span>
+        <span class="timeline-divider">|</span>
+        <span class="font-mono">00:00:00:00</span>
+      </div>
+
+      <h1 class="font-display">Hi, I'm Rit 👋</h1>
+      <p class="subtitle">
+        Video Editor | Storyteller | Visual Artist
+      </p>
+
+      <p class="subtitle" style="font-size: 16px;">
+        I'm Maritta Ketnawang (aka Rit, Richy), a passionate video editor 
+        crafting visual stories that captivate and inspire.
+      </p>
+
+      <div class="section-divider">
+        <hr>
+        <span class="section-label font-mono">Skills</span>
+        <hr>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon">🎬</div>
+          <h3 class="card-title font-display">Premiere Pro</h3>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">✨</div>
+          <h3 class="card-title font-display">After Effects</h3>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <h3 class="card-title font-display">DaVinci</h3>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🎵</div>
+          <h3 class="card-title font-display">Sound</h3>
+        </div>
+      </div>
+
+      <section id="portfolio">
+        <div class="section-divider">
+          <hr>
+          <span class="section-label font-mono">Portfolio</span>
+          <hr>
+        </div>
+
+        <h2 class="section-title font-display">Featured Projects</h2>
+
+        <div class="project-card">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f3?w=800&h=450&fit=crop" alt="Neon Dreams Music Video">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Neon Dreams - Music Video</h3>
+            <p class="project-desc">
+              A vibrant music video featuring dynamic cuts, neon effects, and sync-driven editing for an electronic artist.
+            </p>
+            <div class="tags">
+              <span class="tag">Music Video</span>
+              <span class="tag">Color Grading</span>
+              <span class="tag">Motion Graphics</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Jan 15, 2026</span>
+              <span>Neon Artist</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=450&fit=crop" alt="Urban Style Commercial">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Urban Style - Fashion Commercial</h3>
+            <p class="project-desc">
+              High-fashion commercial showcasing streetwear with cinematic shots and elegant transitions.
+            </p>
+            <div class="tags">
+              <span class="tag">Commercial</span>
+              <span class="tag">Cinematic</span>
+              <span class="tag">Fashion</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Dec 20, 2025</span>
+              <span>Urban Streetwear</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop" alt="Voices of Change Documentary">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Voices of Change - Documentary</h3>
+            <p class="project-desc">
+              A 15-minute documentary featuring interviews with local activists and emotional storytelling.
+            </p>
+            <div class="tags">
+              <span class="tag">Documentary</span>
+              <span class="tag">Interview</span>
+              <span class="tag">Storytelling</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Nov 10, 2025</span>
+              <span>Indie Production</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumbnail">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=450&fit=crop" alt="Sarah & James Wedding">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title font-display">Sarah & James - Wedding Film</h3>
+            <p class="project-desc">
+              A cinematic wedding film capturing the magic of a special day with emotional storytelling.
+            </p>
+            <div class="tags">
+              <span class="tag">Wedding</span>
+              <span class="tag">Cinematic</span>
+              <span class="tag">Emotional</span>
+            </div>
+            <div class="project-meta">
+              <span class="font-mono">Oct 5, 2025</span>
+              <span>Sarah & James</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-divider">
+          <hr>
+          <span class="section-label font-mono">About</span>
+          <hr>
+        </div>
+
+        <h2 class="section-title font-display">About Me</h2>
+        <p class="subtitle" style="font-size: 16px;">
+          Hi! I'm <strong>Maritta Ketnawang</strong>, better known as <strong>Rit</strong> or <strong>Richy</strong>. 
+          I'm a video editor who believes every frame tells a story.
+        </p>
+        <p class="subtitle" style="font-size: 16px;">
+          With a passion for visual storytelling, I craft compelling videos that 
+          connect with audiences. Whether it's a commercial, music video, or 
+          documentary, I bring creativity and technical expertise to every project.
+        </p>
+
+        <div style="margin: 24px 0;">
+          <h3 class="section-title font-display" style="font-size: 18px;">Tools & Software</h3>
+          <div class="tags">
+            <span class="tag">Adobe Premiere Pro</span>
+            <span class="tag">After Effects</span>
+            <span class="tag">DaVinci Resolve</span>
+            <span class="tag">Final Cut Pro</span>
+            <span class="tag">Audition</span>
+            <span class="tag">Cinema 4D</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-divider">
+          <hr>
+          <span class="section-label font-mono">Contact</span>
+          <hr>
+        </div>
+
+        <h2 class="section-title font-display">Let's Work Together</h2>
+        <p class="subtitle" style="font-size: 16px;">
+          Have a project in mind? Let's create something amazing together.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px;">
+          <a href="mailto:rit@example.com" style="text-decoration: none; color: inherit;">
+            <div class="card">
+              <div class="card-icon">📧</div>
+              <h3 class="card-title font-display">Email</h3>
+              <p style="font-size: 12px; color: var(--video-muted);">rit@example.com</p>
+            </div>
+          </a>
+
+          <a href="https://instagram.com/rit" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card">
+              <div class="card-icon">📸</div>
+              <h3 class="card-title font-display">Instagram</h3>
+              <p style="font-size: 12px; color: var(--video-muted);">@rit</p>
+            </div>
+          </a>
+
+          <a href="https://youtube.com/@rit" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card">
+              <div class="card-icon">🎬</div>
+              <h3 class="card-title font-display">YouTube</h3>
+              <p style="font-size: 12px; color: var(--video-muted);">@rit</p>
+            </div>
+          </a>
+
+          <a href="https://linkedin.com/in/rit" target="_blank" style="text-decoration: none; color: inherit;">
+            <div class="card">
+              <div class="card-icon">💼</div>
+              <h3 class="card-title font-display">LinkedIn</h3>
+              <p style="font-size: 12px; color: var(--video-muted);">Connect</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Maritta Ketnawang (Rit) • Video Editor</p>
+  </footer>
+</body>
+</html>

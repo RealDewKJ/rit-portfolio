@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all portfolio entries
+const allEntries = await getCollection('portfolio');
+const entries = allEntries.sort((a, b) => 
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="Portfolio - Rit">
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <!-- Timeline indicator -->
+    <div class="flex items-center gap-2 text-xs font-mono text-video-accent mb-8">
+      <div class="w-2 h-2 bg-video-accent rounded-full"></div>
+      <span>● PORTFOLIO</span>
+      <span class="text-video-muted">|</span>
+      <span>00:00:00:00</span>
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-12">
+      Portfolio
+    </h1>
+
+    <div class="space-y-6">
+      {entries.map((entry) => (
+        <a href={`/portfolio/${entry.slug}`} class="block group">
+          <div class="bg-video-surface border border-video-border rounded-lg overflow-hidden hover:border-video-accent transition-all group-hover:translate-y-[-4px]">
+            {entry.data.thumbnail && (
+              <div class="aspect-video bg-video-bg overflow-hidden">
+                <img 
+                  src={entry.data.thumbnail} 
+                  alt={entry.data.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            )}
+            <div class="p-6">
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <h2 class="font-display font-semibold text-xl group-hover:text-video-accent transition-colors">
+                  {entry.data.title}
+                </h2>
+                <span class="text-video-accent text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  ▶ View
+                </span>
+              </div>
+              <p class="text-video-muted mb-4">
+                {entry.data.description}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-3">
+                {entry.data.tags?.map((tag: string) => (
+                  <span class="px-3 py-1 bg-video-bg border border-video-border rounded-full text-xs text-video-muted">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div class="flex items-center justify-between text-sm text-video-muted">
+                <span class="font-mono">
+                  {entry.data.date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })}
+                </span>
+                {entry.data.client && (
+                  <span>Client: {entry.data.client}</span>
+                )}
+              </div>
+              {entry.data.link && (
+                <a 
+                  href={entry.data.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 mt-4 text-video-accent hover:text-white transition-colors"
+                >
+                  <span>Watch Project</span>
+                  <span>→</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {entries.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-video-muted">No portfolio entries yet...</p>
+      </div>
+    )}
+  </div>
+</Layout>

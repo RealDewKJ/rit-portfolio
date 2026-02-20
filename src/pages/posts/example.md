@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro';
 
 const title = "Example Post Title";
 const date = new Date('2026-02-19');

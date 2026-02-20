@@ -1,84 +1,97 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card, { CardContent, CardTitle } from '../components/ui/card';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
 ---
 
 <Layout title="Rit">
-  <div class="max-w-4xl mx-auto px-6 py-12">
+  <div class="container max-w-4xl mx-auto px-6 py-12">
     <!-- Timeline indicator -->
-    <div class="flex items-center gap-2 text-xs font-mono text-video-accent mb-8">
-      <div class="w-2 h-2 bg-video-accent rounded-full animate-pulse"></div>
+    <div class="flex items-center gap-2 text-xs font-mono text-primary mb-8">
+      <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
       <span>● REC</span>
-      <span class="text-video-muted">|</span>
+      <span class="text-muted-foreground">|</span>
       <span>00:00:00:00</span>
     </div>
 
     <!-- Main content -->
     <div class="space-y-8">
-      <h1 class="text-5xl md:text-6xl font-display font-bold tracking-tight">
+      <h1 class="text-5xl md:text-6xl font-display font-bold tracking-tight text-foreground">
         Hi, I'm Rit 👋
       </h1>
 
-      <p class="text-xl text-video-muted leading-relaxed max-w-2xl">
+      <p class="text-xl text-muted-foreground leading-relaxed max-w-2xl">
         Video Editor | Storyteller | Visual Artist
       </p>
 
       <div class="flex items-center gap-4 py-4">
-        <div class="h-px bg-video-border flex-1"></div>
-        <span class="text-xs font-mono text-video-muted uppercase tracking-widest">About Me</span>
-        <div class="h-px bg-video-border flex-1"></div>
+        <div class="h-px bg-border flex-1"></div>
+        <span class="text-xs font-mono text-muted-foreground uppercase tracking-widest">About Me</span>
+        <div class="h-px bg-border flex-1"></div>
       </div>
 
-      <p class="text-lg text-video-muted leading-relaxed">
-        I'm Maritta Ketnawang (aka Rit, Richy), a passionate video editor 
-        crafting visual stories that captivate and inspire. From commercials 
+      <p class="text-lg text-muted-foreground leading-relaxed">
+        I'm Maritta Ketnawang (aka Rit, Richy), a passionate video editor
+        crafting visual stories that captivate and inspire. From commercials
         to music videos, I bring ideas to life through motion and creativity.
       </p>
 
       <div class="flex items-center gap-4 py-4">
-        <div class="h-px bg-video-border flex-1"></div>
-        <span class="text-xs font-mono text-video-muted uppercase tracking-widest">Skills</span>
-        <div class="h-px bg-video-border flex-1"></div>
+        <div class="h-px bg-border flex-1"></div>
+        <span class="text-xs font-mono text-muted-foreground uppercase tracking-widest">Skills</span>
+        <div class="h-px bg-border flex-1"></div>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-video-surface border border-video-border rounded-lg p-4 text-center hover:border-video-accent transition-colors">
-          <div class="text-2xl mb-2">🎬</div>
-          <h3 class="font-display font-semibold text-sm">Premiere Pro</h3>
-        </div>
+        <Card class="group hover:border-primary transition-colors cursor-pointer">
+          <CardContent className="p-4 text-center">
+            <div class="text-2xl mb-2">🎬</div>
+            <CardTitle className="text-sm font-display">Premiere Pro</CardTitle>
+          </CardContent>
+        </Card>
 
-        <div class="bg-video-surface border border-video-border rounded-lg p-4 text-center hover:border-video-accent transition-colors">
-          <div class="text-2xl mb-2">✨</div>
-          <h3 class="font-display font-semibold text-sm">After Effects</h3>
-        </div>
+        <Card class="group hover:border-primary transition-colors cursor-pointer">
+          <CardContent className="p-4 text-center">
+            <div class="text-2xl mb-2">✨</div>
+            <CardTitle className="text-sm font-display">After Effects</CardTitle>
+          </CardContent>
+        </Card>
 
-        <div class="bg-video-surface border border-video-border rounded-lg p-4 text-center hover:border-video-accent transition-colors">
-          <div class="text-2xl mb-2">🎨</div>
-          <h3 class="font-display font-semibold text-sm">DaVinci Resolve</h3>
-        </div>
+        <Card class="group hover:border-primary transition-colors cursor-pointer">
+          <CardContent className="p-4 text-center">
+            <div class="text-2xl mb-2">🎨</div>
+            <CardTitle className="text-sm font-display">DaVinci Resolve</CardTitle>
+          </CardContent>
+        </Card>
 
-        <div class="bg-video-surface border border-video-border rounded-lg p-4 text-center hover:border-video-accent transition-colors">
-          <div class="text-2xl mb-2">🎵</div>
-          <h3 class="font-display font-semibold text-sm">Sound Design</h3>
-        </div>
+        <Card class="group hover:border-primary transition-colors cursor-pointer">
+          <CardContent className="p-4 text-center">
+            <div class="text-2xl mb-2">🎵</div>
+            <CardTitle className="text-sm font-display">Sound Design</CardTitle>
+          </CardContent>
+        </Card>
       </div>
 
       <div class="flex items-center gap-4 py-4">
-        <div class="h-px bg-video-border flex-1"></div>
-        <span class="text-xs font-mono text-video-muted uppercase tracking-widest">Latest Work</span>
-        <div class="h-px bg-video-border flex-1"></div>
+        <div class="h-px bg-border flex-1"></div>
+        <span class="text-xs font-mono text-muted-foreground uppercase tracking-widest">Latest Work</span>
+        <div class="h-px bg-border flex-1"></div>
       </div>
 
       <div class="space-y-3">
         <a href="/portfolio" class="block group">
-          <div class="flex items-start justify-between gap-4 p-4 bg-video-surface border border-video-border rounded-lg hover:border-video-accent transition-all group-hover:translate-x-1">
-            <div>
-              <h3 class="font-display font-semibold mb-1 group-hover:text-video-accent transition-colors">
-                View All Projects →
-              </h3>
-              <p class="text-sm text-video-muted">Explore my video editing portfolio</p>
-            </div>
-            <div class="text-video-accent opacity-0 group-hover:opacity-100 transition-opacity">▶</div>
-          </div>
+          <Card className="group-hover:border-primary transition-all group-hover:translate-x-1">
+            <CardContent className="p-4 flex items-start justify-between gap-4">
+              <div>
+                <CardTitle className="mb-1 group-hover:text-primary transition-colors">
+                  View All Projects →
+                </CardTitle>
+                <p class="text-sm text-muted-foreground">Explore my video editing portfolio</p>
+              </div>
+              <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">▶</div>
+            </CardContent>
+          </Card>
         </a>
       </div>
     </div>

@@ -2,60 +2,83 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// Get all portfolio entries
 const allEntries = await getCollection('portfolio');
 const entries = allEntries.sort((a, b) => 
   b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
 
-<Layout title="Portfolio - Rit">
+<Layout title="Portfolio | Rit">
   <div class="max-w-4xl mx-auto px-6 py-12">
     <!-- Timeline indicator -->
     <div class="flex items-center gap-2 text-xs font-mono text-video-accent mb-8">
-      <div class="w-2 h-2 bg-video-accent rounded-full"></div>
+      <div class="w-2 h-2 bg-video-accent rounded-full animate-pulse"></div>
       <span>● PORTFOLIO</span>
       <span class="text-video-muted">|</span>
-      <span>00:00:00:00</span>
+      <span class="font-mono">00:00:00:00</span>
     </div>
 
-    <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-12">
-      Portfolio
-    </h1>
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4 text-[var(--video-heading)]">
+        Portfolio
+      </h1>
+      <p class="text-video-muted text-lg">
+        A collection of my video editing projects, from music videos to commercials and documentaries.
+      </p>
+    </div>
 
-    <div class="space-y-6">
-      {entries.map((entry) => (
-        <a href={`/portfolio/${entry.slug}`} class="block group">
-          <div class="bg-video-surface border border-video-border rounded-lg overflow-hidden hover:border-video-accent transition-all group-hover:translate-y-[-4px]">
+    <!-- Search Bar -->
+    <div class="search-container mb-12">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search portfolio..."
+        class="w-full px-4 py-3 bg-video-surface border-2 border-video-border rounded-full text-[var(--video-text)] text-sm focus:outline-none focus:border-video-accent transition-colors placeholder:text-[var(--video-muted)]"
+      >
+      <button 
+        id="searchClear"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-video-surface border border-video-border rounded-full w-7 h-7 flex items-center justify-center text-video-muted cursor-pointer text-xs hover:border-video-accent hover:text-video-accent transition-all opacity-0 pointer-events-none"
+        aria-label="Clear search"
+      >
+        ✕
+      </button>
+    </div>
+
+    <h2 class="text-2xl font-display font-semibold mb-6 text-video-heading">
+      All Projects
+    </h2>
+
+    <div id="projectsContainer" class="space-y-4">
+      {entries.map((entry) => {
+        const filename = entry.id.split('/').pop()?.replace('.md', '') || entry.slug;
+        return (
+        <a href={`/portfolio/${filename}/`} class="block group">
+          <div class="project-card bg-video-surface border border-video-border rounded-lg overflow-hidden transition-all hover:border-video-accent hover:translate-y-[-4px]">
             {entry.data.thumbnail && (
               <div class="aspect-video bg-video-bg overflow-hidden">
                 <img 
                   src={entry.data.thumbnail} 
                   alt={entry.data.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
             )}
-            <div class="p-6">
-              <div class="flex items-start justify-between gap-4 mb-3">
-                <h2 class="font-display font-semibold text-xl group-hover:text-video-accent transition-colors">
-                  {entry.data.title}
-                </h2>
-                <span class="text-video-accent text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  ▶ View
-                </span>
-              </div>
-              <p class="text-video-muted mb-4">
+            <div class="project-info p-6">
+              <h3 class="project-title font-display font-semibold text-lg mb-2 text-video-heading group-hover:text-video-accent transition-colors">
+                {entry.data.title}
+              </h3>
+              <p class="project-desc text-video-muted text-sm mb-3">
                 {entry.data.description}
               </p>
-              <div class="flex flex-wrap gap-2 mb-3">
+              <div class="tags flex flex-wrap gap-2 mb-3">
                 {entry.data.tags?.map((tag: string) => (
                   <span class="px-3 py-1 bg-video-bg border border-video-border rounded-full text-xs text-video-muted">
                     {tag}
                   </span>
                 ))}
               </div>
-              <div class="flex items-center justify-between text-sm text-video-muted">
+              <div class="project-meta flex items-center justify-between text-xs text-video-muted">
                 <span class="font-mono">
                   {entry.data.date.toLocaleDateString('en-US', { 
                     year: 'numeric', 
@@ -63,31 +86,86 @@ const entries = allEntries.sort((a, b) =>
                     day: 'numeric' 
                   })}
                 </span>
-                {entry.data.client && (
-                  <span>Client: {entry.data.client}</span>
-                )}
+                <span>{entry.data.client}</span>
               </div>
-              {entry.data.link && (
-                <a 
-                  href={entry.data.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 mt-4 text-video-accent hover:text-white transition-colors"
-                >
-                  <span>Watch Project</span>
-                  <span>→</span>
-                </a>
-              )}
             </div>
           </div>
         </a>
-      ))}
+        );
+      })}
     </div>
 
-    {entries.length === 0 && (
-      <div class="text-center py-12">
-        <p class="text-video-muted">No portfolio entries yet...</p>
-      </div>
-    )}
+    <!-- No Results Message -->
+    <div class="no-results text-center py-12 text-video-muted text-lg hidden" id="noResults">
+      <p>🔍 No projects found matching your search.</p>
+      <p class="text-sm mt-2">Try different keywords.</p>
+    </div>
+
+    <style>
+      .search-container {
+        position: relative;
+        max-width: 600px;
+      }
+      .project-card.hidden {
+        display: none;
+      }
+      .no-results.visible {
+        display: block;
+      }
+    </style>
   </div>
 </Layout>
+
+<script>
+  // Search Functionality
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const projects = document.querySelectorAll('.project-card');
+  const noResults = document.getElementById('noResults');
+
+  function searchProjects() {
+    const query = searchInput.value.toLowerCase().trim();
+    
+    if (query === '') {
+      projects.forEach(project => {
+        project.parentElement.classList.remove('hidden');
+      });
+      noResults.classList.remove('visible');
+      searchClear.classList.remove('opacity-100', 'pointer-events-auto');
+      return;
+    }
+
+    searchClear.classList.add('opacity-100', 'pointer-events-auto');
+    let hasResults = false;
+
+    projects.forEach(project => {
+      const card = project.parentElement;
+      const title = project.querySelector('.project-title')?.textContent || '';
+      const tags = Array.from(project.querySelectorAll('.tag')).map(t => t.textContent) || [];
+      const client = project.querySelector('.project-meta span:last-child')?.textContent || '';
+      
+      if (title.toLowerCase().includes(query) || 
+          tags.some(t => t.toLowerCase().includes(query)) || 
+          client.toLowerCase().includes(query)) {
+        card.classList.remove('hidden');
+        hasResults = true;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (hasResults) {
+      noResults.classList.remove('visible');
+    } else {
+      noResults.classList.add('visible');
+    }
+  }
+
+  function clearSearch() {
+    searchInput.value = '';
+    searchProjects();
+  }
+
+  searchInput.addEventListener('input', searchProjects);
+  searchClear.addEventListener('click', clearSearch);
+</script>

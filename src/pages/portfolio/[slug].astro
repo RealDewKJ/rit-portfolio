@@ -1,38 +1,48 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 
-export async function getStaticPaths() {
-  const entries = await getCollection('portfolio');
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+export const prerender = false; // Enable SSR for this page
+
+const { slug } = Astro.params;
+
+// Find the entry with matching slug
+const allEntries = await getCollection('portfolio');
+const entry = allEntries.find(e => {
+  const filename = e.id.split('/').pop()?.replace('.md', '') || e.slug;
+  return filename === slug;
+});
+
+if (!entry) {
+  return Astro.redirect('/404');
 }
 
-const { entry } = Astro.props;
 const { Content } = await entry.render();
+const year = entry.data.date.getFullYear();
 ---
 
 <Layout title={`${entry.data.title} | Rit`}>
   <div class="max-w-4xl mx-auto px-6 py-12">
-    <!-- Timeline indicator -->
-    <div class="flex items-center gap-2 text-xs font-mono text-video-accent mb-8">
-      <div class="w-2 h-2 bg-video-accent rounded-full"></div>
-      <span>● PROJECT</span>
-      <span class="text-video-muted">|</span>
-      <span>00:00:00:00</span>
+    <!-- YEAR Timeline Header -->
+    <div class="timeline-header mb-8">
+      <div class="timeline-indicator">
+        <div class="rec-dot"></div>
+        <span>● REC</span>
+        <span class="divider">|</span>
+        <span class="year font-mono">{year}</span>
+      </div>
     </div>
 
     <!-- Back button -->
-    <a href="/portfolio" class="inline-flex items-center gap-2 text-video-muted hover:text-video-accent transition-colors mb-8">
+    <a href="/portfolio" class="inline-flex items-center gap-2 text-video-muted hover:text-video-accent transition-colors mb-12">
       <span>←</span>
       <span>Back to Portfolio</span>
     </a>
 
     <!-- Header -->
-    <div class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4 text-video-heading">
         {entry.data.title}
       </h1>
       <p class="text-xl text-video-muted">
@@ -42,7 +52,7 @@ const { Content } = await entry.render();
 
     <!-- Thumbnail / Video Embed -->
     {entry.data.thumbnail && (
-      <div class="aspect-video bg-video-bg rounded-lg overflow-hidden mb-8">
+      <div class="aspect-video bg-video-bg rounded-lg overflow-hidden mb-12 border-2 border-video-border">
         {entry.data.youtubeId ? (
           <iframe
             src={`https://www.youtube.com/embed/${entry.data.youtubeId}`}
@@ -63,10 +73,21 @@ const { Content } = await entry.render();
     )}
 
     <!-- Meta info -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-      <div class="bg-video-surface border border-video-border rounded-lg p-4">
-        <h3 class="text-sm font-mono text-video-muted uppercase tracking-wider mb-2">Date</h3>
-        <p class="font-display font-semibold">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+      <div class="bg-video-surface border border-video-border rounded-lg p-6">
+        <h3 class="text-sm font-mono text-video-muted uppercase tracking-wider mb-3">
+          Year
+        </h3>
+        <p class="text-2xl font-display font-bold text-video-accent">
+          {year}
+        </p>
+      </div>
+
+      <div class="bg-video-surface border border-video-border rounded-lg p-6">
+        <h3 class="text-sm font-mono text-video-muted uppercase tracking-wider mb-3">
+          Date
+        </h3>
+        <p class="font-display font-semibold text-video-heading">
           {entry.data.date.toLocaleDateString('en-US', { 
             year: 'numeric', 
             month: 'long', 
@@ -76,9 +97,11 @@ const { Content } = await entry.render();
       </div>
 
       {entry.data.client && (
-        <div class="bg-video-surface border border-video-border rounded-lg p-4">
-          <h3 class="text-sm font-mono text-video-muted uppercase tracking-wider mb-2">Client</h3>
-          <p class="font-display font-semibold">
+        <div class="bg-video-surface border border-video-border rounded-lg p-6">
+          <h3 class="text-sm font-mono text-video-muted uppercase tracking-wider mb-3">
+            Client
+          </h3>
+          <p class="font-display font-semibold text-video-heading">
             {entry.data.client}
           </p>
         </div>
@@ -87,9 +110,9 @@ const { Content } = await entry.render();
 
     <!-- Tags -->
     {entry.data.tags && entry.data.tags.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-8">
+      <div class="flex flex-wrap gap-2 mb-12">
         {entry.data.tags.map((tag: string) => (
-          <span class="px-4 py-2 bg-video-surface border border-video-border rounded-full text-sm">
+          <span class="px-4 py-2 bg-video-surface border border-video-border rounded-full text-sm text-video-muted">
             {tag}
           </span>
         ))}
@@ -98,12 +121,12 @@ const { Content } = await entry.render();
 
     <!-- External Link -->
     {entry.data.link && (
-      <div class="mb-8">
+      <div class="mb-12">
         <a 
           href={entry.data.link} 
           target="_blank" 
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-video-accent text-black font-display font-semibold rounded-lg hover:bg-white transition-colors"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-video-accent text-black font-display font-semibold rounded-lg hover:bg-white transition-all hover:shadow-lg hover:translate-y-[-2px]"
         >
           <span>Watch on YouTube</span>
           <span>→</span>
@@ -112,8 +135,78 @@ const { Content } = await entry.render();
     )}
 
     <!-- Content -->
-    <div class="prose prose-invert prose-lg max-w-none">
+    <div class="prose prose-invert prose-lg max-w-none text-video-text">
       <Content />
     </div>
   </div>
+
+  <style>
+    .timeline-header {
+      background: linear-gradient(135deg, var(--video-surface) 0%, var(--video-bg) 100%);
+      border: 2px solid var(--video-border);
+      border-radius: 999px;
+      padding: 16px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--video-accent), var(--video-accent2));
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .timeline-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--video-accent);
+      font-weight: 600;
+    }
+
+    .rec-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--video-accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .divider {
+      color: var(--video-muted);
+      opacity: 0.5;
+    }
+
+    .year {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--video-accent), var(--video-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @media (min-width: 768px) {
+      .year {
+        font-size: 64px;
+      }
+    }
+  </style>
 </Layout>

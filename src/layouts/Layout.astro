@@ -1,35 +1,46 @@
 ---
-import '../styles/global.css';
+import { Sun, Moon } from '@lucide/astro';
 
 interface Props {
-  title: string;
+  title?: string;
 }
 
-const { title } = Astro.props;
+const { title = 'Rit | Video Editor Portfolio' } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class={Astro.locals.theme || 'dark'}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Rit (Maritta Ketnawang) - Video Editor Portfolio" />
-    <title>{title} | Rit</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>{title}</title>
+    <meta name="description" content="Rit - Video Editor & Visual Storyteller Portfolio" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style is:global>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .font-display {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
   </head>
-  <body class="bg-video-bg text-white font-body antialiased">
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-video-bg/80 backdrop-blur-md border-b border-video-border">
-      <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="/" class="text-video-accent font-display font-bold text-xl tracking-tight hover:text-white transition-colors">
-          Rit
+  <body>
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div class="container flex h-16 items-center justify-between max-w-4xl mx-auto px-6">
+        <a href="/" class="flex items-center gap-2 text-foreground font-bold text-xl hover:text-primary transition-colors">
+          Richy Maritta
         </a>
         <div class="flex items-center gap-6">
-          <a href="/" class="text-sm text-video-muted hover:text-white transition-colors">Home</a>
-          <a href="/portfolio" class="text-sm text-video-muted hover:text-white transition-colors">Portfolio</a>
-          <a href="/about" class="text-sm text-video-muted hover:text-white transition-colors">About</a>
-          <a href="/contact" class="text-sm text-video-muted hover:text-white transition-colors">Contact</a>
+          <a href="/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Home</a>
+          <a href="/portfolio/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Portfolio</a>
+          <a href="/about/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">About</a>
+          <a href="/contact/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Contact</a>
         </div>
       </div>
     </nav>
@@ -38,10 +49,48 @@ const { title } = Astro.props;
       <slot />
     </main>
 
-    <footer class="border-t border-video-border mt-20 py-8">
-      <div class="max-w-4xl mx-auto px-6 text-center text-sm text-video-muted">
-        <p>© 2026 Maritta Ketnawang (Rit) • Video Editor</p>
-      </div>
+    <footer class="border-t border-border mt-20 py-8 px-6 text-center">
+      <p class="text-sm text-muted-foreground">© 2026 Maritta Ketnawang (Rit) • Video Editor</p>
     </footer>
+
+    <!-- Theme Toggle Button -->
+    <button
+      id="themeToggle"
+      class="fixed bottom-4 right-4 z-50 rounded-full w-12 h-12 shadow-lg hover:shadow-xl transition-all border-2 border-primary bg-background hover:bg-primary/10 flex items-center justify-center"
+      aria-label="Toggle theme"
+    >
+      <Sun class="h-5 w-5 hidden dark:block" />
+      <Moon class="h-5 w-5 block dark:hidden" />
+    </button>
+
+    <script is:inline>
+      // Theme Management
+      function getTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) return savedTheme;
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          return 'light';
+        }
+        return 'dark';
+      }
+
+      function setTheme(theme) {
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      }
+
+      // Initialize theme
+      const initialTheme = getTheme();
+      setTheme(initialTheme);
+
+      // Theme toggle
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+      });
+    </script>
   </body>
 </html>

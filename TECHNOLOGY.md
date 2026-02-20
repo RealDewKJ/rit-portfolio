@@ -6,12 +6,11 @@ This project uses a **fixed technology stack** that will NOT change.
 
 **Core Stack:**
 - ✅ **Astro** - Web framework
-- ✅ **shadcn/ui** - UI component library
 - ✅ **Tailwind CSS** - Styling
 
 **What We DON'T Use:**
 - ❌ React (except optional client-side interactivity)
-- ❌ Other UI libraries (MUI, Chakra, Ant Design, etc.)
+- ❌ UI libraries (shadcn/ui, MUI, Chakra, Ant Design, etc.)
 - ❌ CSS-in-JS libraries (styled-components, emotion)
 - ❌ Other build tools (Webpack, Rollup directly)
 
@@ -25,13 +24,13 @@ This project uses a **fixed technology stack** that will NOT change.
 - **Simplicity:** Easy to develop and maintain
 - **Modern:** Built for the current web (2026+)
 
-### Why shadcn/ui?
+### Why Tailwind CSS?
 
-- **Lightweight:** No runtime dependencies, just HTML + CSS
-- **Customizable:** Copy-paste components, you own the code
-- **Tailwind-based:** Already using Tailwind, perfect fit
-- **Accessible:** Built with accessibility in mind
-- **No lock-in:** Can modify any component
+- **Utility-first:** Rapid development with pre-built classes
+- **Consistent:** Design system built-in
+- **Responsive:** Mobile-first approach
+- **Customizable:** Easy to extend with your own styles
+- **No lock-in:** Just CSS, no component library dependencies
 
 ### Why NOT React?
 
@@ -39,6 +38,13 @@ This project uses a **fixed technology stack** that will NOT change.
 - **Bundle size:** Adds unnecessary JavaScript
 - **Complexity:** More moving parts for simple content
 - **Astro is better:** Server-side components are perfect here
+
+### Why NOT UI Libraries?
+
+- **Custom design:** Your portfolio should look unique, not like a template
+- **Less bloat:** No unused components or styles
+- **Full control:** Every pixel is under your control
+- **Better learning:** Understanding CSS fundamentals helps long-term
 
 ## Component Guidelines
 
@@ -63,45 +69,49 @@ const { title, variant = 'default' } = Astro.props;
 </div>
 ```
 
-### Add New shadcn/ui Components
+### Use Pure Tailwind CSS
 
-```bash
-npx shadcn@latest add [component-name] --yes
-```
+Style everything with Tailwind utility classes:
 
-**If it creates React (.tsx) files, convert to Astro:**
-
-1. Copy the component structure to `.astro`
-2. Replace `className` with `class:list`
-3. Replace `{children}` with `<slot />`
-4. Remove React hooks (`useState`, `useEffect`)
-5. Use Astro's built-in features instead
-
-### Example: Convert React to Astro
-
-**Before (React):**
-```tsx
-import { useState } from 'react';
-
-export function Button({ label }: { label: string }) {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>{label} ({count})</button>;
-}
-```
-
-**After (Astro):**
 ```astro
 ---
-interface Props {
-  label: string;
-}
-
-const { label } = Astro.props;
 ---
 
-<button data-astro-onclick="...">
-  {label} <span id="count">0</span>
-</button>
+<div class="bg-gray-900 border-2 border-gray-700 rounded-lg p-6 hover:border-purple-500 transition-colors">
+  <h2 class="text-xl font-bold text-white mb-2">Title</h2>
+  <p class="text-gray-300">Description</p>
+</div>
+```
+
+### Create Reusable Components
+
+Build your own components using Tailwind classes:
+
+```astro
+---
+// src/components/ProjectCard.astro
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+const { title, description, tags } = Astro.props;
+---
+
+<div class="bg-gray-900 border-2 border-gray-700 rounded-lg overflow-hidden hover:border-purple-500 transition-all">
+  <div class="p-6">
+    <h3 class="text-xl font-bold text-white mb-2">{title}</h3>
+    <p class="text-gray-300 text-sm mb-4">{description}</p>
+    <div class="flex flex-wrap gap-2">
+      {tags.map(tag => (
+        <span class="px-3 py-1 bg-gray-800 rounded-full text-xs text-gray-300">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
 ```
 
 ## Interactivity Policy
@@ -137,15 +147,13 @@ For small interactions, use:
 
 ```
 src/
-├── components/
-│   ├── ui/              # shadcn/ui components (.astro only!)
-│   │   ├── Button.astro
-│   │   ├── Card/
-│   │   └── ...
-│   └── ...             # Other Astro components
-├── pages/              # Route pages (.astro)
-├── layouts/            # Layout components (.astro)
-└── content/            # Markdown content
+├── components/          # Reusable Astro components
+│   ├── ProjectCard.astro
+│   ├── SkillCard.astro
+│   └── ...
+├── pages/               # Route pages (.astro)
+├── layouts/             # Layout components (.astro)
+└── content/             # Markdown content
 ```
 
 ## Dependencies
@@ -175,6 +183,8 @@ src/
   "react": "...",
   "react-dom": "...",
   "@astrojs/react": "...",
+  "shadcn-ui": "...",
+  "@radix-ui/*": "...",
   "next": "...",
   "nuxt": "...",
   "vue": "..."
@@ -209,9 +219,8 @@ src/
 3. Test on mobile devices
 
 ### Quarterly
-1. Review shadcn/ui updates
-2. Check Tailwind CSS updates
-3. Review performance metrics
+1. Check Tailwind CSS updates
+2. Review performance metrics
 
 ### Yearly
 1. Evaluate Astro major versions

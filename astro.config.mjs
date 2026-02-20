@@ -1,11 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
-import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 import path from 'path';
 
 export default defineConfig({
-  integrations: [tailwind(), react()],
+  integrations: [tailwind()],
   adapter: vercel(),
   output: 'server',
   site: 'https://your-domain.vercel.app',
